@@ -1,6 +1,6 @@
-# CSDNDownloader
+# CSDN博客下载助手
 
-本项目基于Python 3.6.4,所需支持包见requirements.txt
+本项目基于Python 3.6.4,所需支持包见requirements.txt,开发目的旨在提供一个便捷的，具有多种模式的CSDN博客下载工具。
 
 搜索了一下，部分源码来自[@tansty的CSDN-spider项目](https://github.com/Tansty/CSDN-spider/)
 
@@ -26,7 +26,7 @@
 
 ~~我记得应该github上有这个源码的仓库，我只是做了点修改，但搜了半天发现没找到是哪个，就自己上传上来了。~~
 
-v1.0
+### v1.0
 功能：
 1. 实现了CSDN博客的下载，能正确把博客标题解析为MD文件的一级标题
 
