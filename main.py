@@ -12,7 +12,7 @@ class MyWindow(QMainWindow,Ui_MainWindow):
    
     def __init__(self, parent=None):
         super().__init__(parent)
-        self.setupUi(self)
+        self.__ui = MainWindowUI.Ui_MainWindow()
         self.signal_connect()
         self.initUI()
 
