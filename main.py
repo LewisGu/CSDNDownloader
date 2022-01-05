@@ -2,11 +2,9 @@ import sys
 from PyQt5.QtWidgets import QMainWindow,QApplication,QMessageBox
 from PyQt5.QtCore import pyqtSignal, QObject, Qt, pyqtSlot
 
-#这个test_pyqt是ui文件对应的py文件的文件名
 from csdndownloader_ui import Ui_MainWindow
 from csdn_url_analysis import *
  
-#我的Form是用的QWidget作为基类
 class MyWindow(QMainWindow,Ui_MainWindow):
 
     oneKeyDownloadSignal = pyqtSignal(list)

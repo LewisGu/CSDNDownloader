@@ -30,14 +30,31 @@ class CSDN_URL_Analysis():
         content=page.css("article").get()
         content=re.sub("<a.*?a>","",content)
         content = re.sub("<br>", "", content)
+        #过滤a标签和br标签
         text = tomd.Tomd(content).markdown
+        #转换为markdown 文件
         self.title = title
+        self.check_title_legal()
         self.text = text
-            
+
+    # 由于Windows系统要求文件名不得包含“\/:*?"<>|”，故需要做合法性检查，替换所有非法字符为空白
+    def check_title_legal(self):
+        if  "\\" in self.title or "/" in self.title or ":" in self.title or "?" in self.title or "\"" in self.title or "<" in self.title or ">" in self.title or "|" in self.title :
+            self.title = self.title.replace('\\',' ')
+            self.title = self.title.replace("/",' ')
+            self.title = self.title.replace(":",' ')
+            self.title = self.title.replace("?",' ')
+            self.title = self.title.replace("\"",' ')
+            self.title = self.title.replace("<",' ')
+            self.title = self.title.replace(">",' ')
+            self.title = self.title.replace("|",' ')
+        else:
+            pass
+
     def save_md_file_from_html(self):
         #转换为markdown 文件
-        filename = self.title+".md"
         currentWD = os.getcwd()
+        filename = self.title+".md"
         filenameWithD = currentWD + "\\" + filename
         with open(filenameWithD,mode="w",encoding="utf-8") as f:
             f.write("# "+self.title)
