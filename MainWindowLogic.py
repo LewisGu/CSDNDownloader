@@ -3,7 +3,9 @@ from PyQt5.QtWidgets import QFileDialog, QMessageBox, QWidget
 from UI import MainWindowUI
 
 from GlobalConfig import *
-from csdn_url_analysis import *
+from Function.csdn_url_analysis import *
+from Function.csdn_author_analysis import *
+from Function.public_function import *
 
 class WidgetLogic(QWidget):
     oneKeyDownloadSignal = pyqtSignal(list) # 下载模式 输入内容
@@ -25,19 +27,23 @@ class WidgetLogic(QWidget):
 
     def signal_connect(self):
         """
-        信号连接
-        """
-        """
         信号与槽连接
         """
         # 一键下载
-        #toggled信号与槽函数绑定
+        #模式选择多选一与槽函数绑定
         self.__ui.blog_mode_rbtn.toggled.connect(self.blog_mode_editable)
         self.__ui.column_mode_rbtn.toggled.connect(self.column_mode_editable)
         self.__ui.author_mode_rbtn.toggled.connect(self.author_mode_editable)
 
+        #一键下载按钮与信号发射函数绑定
         self.__ui.Download_pbtn.clicked.connect(self.oneKeyDownloadSignal_handler)
+        #一键下载信号与功能函数绑定
         self.oneKeyDownloadSignal.connect(self.onekey_download)
+
+        #日志区
+        # 保存日志
+        self.__ui.log_save_btn.clicked.connect(self.save_log_handler)
+        self.__ui.log_clean_btn.clicked.connect(self.clear_log_handler)
 
 
     """当模式选择后，部分输入框变灰"""
@@ -62,7 +68,7 @@ class WidgetLogic(QWidget):
         self.__ui.blog_url_te.setDisabled(able)
         self.downloadtype = self.author_mode
 
-    # 已改写
+    # 构造[模式,输入内容]的列表，并通过信号发射出去
     def oneKeyDownloadSignal_handler(self):
         """
         一键下载按钮控件点击触发的槽
@@ -81,6 +87,16 @@ class WidgetLogic(QWidget):
             # 发射信号，传输配置(类型及输入)
             self.oneKeyDownloadSignal.emit(download_config)
 
+    # 保存日志
+    def save_log_handler(self):
+        PlainText = self.__ui.log_tb.toPlainText()
+        saveLogText(str(PlainText))
+
+    # 清除日志
+    def clear_log(self):
+        self.__ui.log_tb.clear()
+        
+    # 根据模式获取对应区域的输入内容
     def get_input_text(self):
         if self.downloadtype == blog_mode:
             self.inputtext = self.__ui.blog_url_te.toPlainText() # 获取输入 eg

@@ -4,6 +4,8 @@ import tomd
 import os
 import re
 
+from public_function import *
+
 head={"User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.105 Safari/537.36 Edg/84.0.522.52"
         }
 
@@ -53,7 +55,7 @@ class CSDN_URL_Analysis():
 
     def save_md_file_from_html(self):
         #转换为markdown 文件
-        currentWD = os.getcwd()
+        currentWD = getCurrentWD()
         filename = self.title+".md"
         filenameWithD = currentWD + "\\" + filename
         with open(filenameWithD,mode="w",encoding="utf-8") as f:

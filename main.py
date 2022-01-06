@@ -2,8 +2,8 @@ import sys
 from PyQt5.QtWidgets import QMainWindow,QApplication,QMessageBox
 from PyQt5.QtCore import pyqtSignal, QObject, Qt, pyqtSlot
 
-from csdndownloader_ui import Ui_MainWindow
-from csdn_url_analysis import *
+from Function.csdndownloader_ui import Ui_MainWindow
+from Function.csdn_url_analysis import *
  
 class MyWindow(QMainWindow,Ui_MainWindow):
 
