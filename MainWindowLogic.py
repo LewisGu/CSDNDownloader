@@ -2,7 +2,6 @@ from PyQt5.QtCore import Qt, QTimer, pyqtSignal
 from PyQt5.QtWidgets import QFileDialog, QMessageBox, QWidget
 from UI import MainWindowUI
 
-from GlobalConfig import *
 from Function.csdn_url_analysis import *
 from Function.csdn_author_analysis import *
 from Function.public_function import *
@@ -90,7 +89,7 @@ class WidgetLogic(QWidget):
     # 保存日志
     def save_log_handler(self):
         PlainText = self.__ui.log_tb.toPlainText()
-        saveLogText(str(PlainText))
+        save_log_text(str(PlainText))
 
     # 清除日志
     def clear_log(self):
@@ -122,7 +121,7 @@ class WidgetLogic(QWidget):
             pass
 
     def blog_mode_analysis(self,text):
-        titlelist = urltextanalysis(text)
+        titlelist = url_text_analysis(text)
         titlenum = len(titlelist)
         self.MessageBox = QMessageBox(self)
         if titlenum == 0:

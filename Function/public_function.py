@@ -1,10 +1,10 @@
 import time
 import os
 
-def getCurrentWD():
+def get_current_wd():
     return os.getcwd()
 
-def getCurrentTime():
+def get_current_time():
     return time.strftime('%Y-%m-%d %H:%M:%S', time.localtime())
 
 def full_mkdir(inputdir):
@@ -13,15 +13,15 @@ def full_mkdir(inputdir):
     else:
         os.mkdir(inputdir)
 
-def saveLogText(LogText):
-    timestring = getCurrentTime()
+def save_log_text(LogText):
+    timestring = get_current_time()
     timestring = timestring.replace(':', '-')
-    log_wd = getCurrentWD() + "\\log"
+    log_wd = get_current_wd() + "\\log"
     full_mkdir(log_wd)
-    filename = getCurrentWD() +  "\\log\\CSDNDownloader" + timestring + ".log"
+    filename = get_current_wd() +  "\\log\\CSDNDownloader" + timestring + ".log"
     with open(filename,mode="w",encoding="utf-8") as f:
         print(f.write('{}'.format(LogText)))
         f.close()
 
 if __name__ == '__main__':
-    saveLogText("LogText")
+    save_log_text("LogText")

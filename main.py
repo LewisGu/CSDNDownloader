@@ -1,18 +1,21 @@
 import sys
 from PyQt5.QtWidgets import QMainWindow,QApplication,QMessageBox
-from PyQt5.QtCore import pyqtSignal, QObject, Qt, pyqtSlot
+from PyQt5.QtCore import pyqtSignal
+from PyQt5.QtGui import QIcon
 
-from Function.csdndownloader_ui import Ui_MainWindow
+from csdndownloader_ui import Ui_MainWindow
 from Function.csdn_url_analysis import *
  
 class MyWindow(QMainWindow,Ui_MainWindow):
-
+    """
+    主要是UI相关功能代码，涉及信号/槽等
+    """
     oneKeyDownloadSignal = pyqtSignal(list)
     logtext = ""
    
     def __init__(self, parent=None):
         super().__init__(parent)
-        self.__ui = MainWindowUI.Ui_MainWindow()
+        self.setupUi(self)
         self.signal_connect()
         self.initUI()
 
@@ -59,14 +62,15 @@ class MyWindow(QMainWindow,Ui_MainWindow):
             pass
 
     def blog_mode_analysis(self,text):
-        titlelist = urltextanalysis(text)
+        # 单文章模式代码
+        titlelist = url_text_analysis(text)
         titlenum = len(titlelist)
         self.MessageBox = QMessageBox(self)
         if titlenum == 0:
             self.MessageBox.critical(self, "错误", "请输入正确的URL")
         elif titlenum == 1:
             titlename = titlelist[0]
-            self.MessageBox.information(self, "正确", "文章"+titlename+"下载成功")
+            self.MessageBox.information(self, "正确", "文章 《"+titlename+"》 下载成功")
         else:
             titlenames = ""
             for title in titlelist:
@@ -75,6 +79,8 @@ class MyWindow(QMainWindow,Ui_MainWindow):
         return
 
     def initUI(self):
+        # 显示UI
+        self.setWindowIcon(QIcon('CSDNDownloader.png'))
         self.show()
 
 if __name__=="__main__":
