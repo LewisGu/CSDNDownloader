@@ -3,7 +3,9 @@ from PyQt5.QtWidgets import QMainWindow,QApplication,QMessageBox
 from PyQt5.QtCore import pyqtSignal
 from PyQt5.QtGui import QIcon
 
-from csdndownloader_ui import Ui_MainWindow
+import icon_rc
+
+from Ui_csdndownloader import Ui_MainWindow
 from Function.csdn_url_analysis import *
  
 class MyWindow(QMainWindow,Ui_MainWindow):
@@ -24,7 +26,7 @@ class MyWindow(QMainWindow,Ui_MainWindow):
         信号连接
         """
         self.oneKeyDownloadSignal.connect(self.onekey_download)
-        self.Download_pbtn.clicked.connect(self.emitOneKeyDownloadSignal)
+        self.download_pb.clicked.connect(self.emitOneKeyDownloadSignal)
 
     def get_rbtn(self):
         if(self.blog_mode_rbtn.isChecked()):
@@ -86,4 +88,5 @@ class MyWindow(QMainWindow,Ui_MainWindow):
 if __name__=="__main__":
     app=QApplication(sys.argv)
     w=MyWindow()
+    w.setWindowIcon(QIcon(':/app.ico'))
     sys.exit(app.exec_())
